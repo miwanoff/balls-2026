@@ -2,6 +2,8 @@ const canvas = document.getElementById("balls");
 // const ctx = canvas.getContext("2d");
 const n = 10;
 
+let colors = ["Red", "Orange", "Yellow", "Green","Blue", "Purple"];
+
 class Ball {
   constructor(canvas, x = 100, y = 100, radius = 3) {
     this.ctx = canvas.getContext("2d");
