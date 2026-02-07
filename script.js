@@ -25,6 +25,20 @@ class Ball {
   draw() {
     this.circle(this.x, this.y, this.radius, this.color);
   }
+
+  move() {
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
+  }
+
+  checkCollosion() {
+    if (this.x <= 0 || this.x >= this.width) {
+      this.xSpeed = -this.xSpeed;
+    }
+    if (this.y <= 0 || this.y >= this.height) {
+      this.ySpeed = -this.ySpeed;
+    }
+  }
 }
 
 class BallsGame {
@@ -41,10 +55,21 @@ class BallsGame {
     this.ctx.strokeRect(0, 0, this.width, this.height);
   }
 
+  clear() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+  }
+
   go() {
+    this.clear();
     for (let i = 0; i < n; i++) {
       this.balls[i].draw();
+      this.balls[i].move();
+      this.balls[i].checkCollosion();
     }
+  }
+
+  start() {
+    setInterval(this.go.bind(this), 30);
   }
 }
 
@@ -58,4 +83,4 @@ for (let i = 0; i < n; i++) {
 const ballsGame = new BallsGame(balls, canvas);
 ballsGame.drawBorder();
 
-ballsGame.go();
+ballsGame.start();
