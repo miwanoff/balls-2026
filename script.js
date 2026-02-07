@@ -1,5 +1,6 @@
 const canvas = document.getElementById("balls");
 // const ctx = canvas.getContext("2d");
+const n = 10;
 
 class Ball {
   constructor(canvas, x = 100, y = 100, radius = 3) {
@@ -41,14 +42,20 @@ class BallsGame {
   }
 
   go() {
-    this.balls.draw();
+    for (let i = 0; i < n; i++) {
+      this.balls[i].draw();
+    }
   }
 }
 
-const ball = new Ball(canvas);
+const balls = [];
+for (let i = 0; i < n; i++) {
+  balls[i] = new Ball(canvas);
+}
+
 // ball.draw();
 
-const ballsGame = new BallsGame(ball, canvas);
+const ballsGame = new BallsGame(balls, canvas);
 ballsGame.drawBorder();
 
 ballsGame.go();
